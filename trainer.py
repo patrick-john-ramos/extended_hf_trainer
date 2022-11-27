@@ -56,7 +56,7 @@ else:
 
 logger = logging.get_logger(__name__)
 
-class CLIPDistiller(Trainer):
+class ExtendedTrainer(Trainer):
 
   def _inner_training_loop(
         self, batch_size=None, args=None, resume_from_checkpoint=None, trial=None, ignore_keys_for_eval=None
