@@ -1,3 +1,4 @@
+import torch
 from transformers import Trainer
 from transformers.trainer import TRAINER_STATE_NAME
 import math
