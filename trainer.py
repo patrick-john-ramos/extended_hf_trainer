@@ -499,4 +499,4 @@ class ExtendedTrainer(Trainer):
         else:
             loss.backward()
 
-        return loss.detach(), {k: v.detach().item() if v.dim() == 1 for k, v in outputs.items()}
+        return loss.detach(), {k: v.detach().item() for k, v in outputs.items() if v.dim() == 1}
