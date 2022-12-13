@@ -451,8 +451,10 @@ class ExtendedTrainer(Trainer):
 
             logs["loss"] = round(tr_loss_scalar / (self.state.global_step - self._globalstep_last_logged), 4)
             logs["learning_rate"] = self._get_learning_rate()
-
-            del outputs["loss"]
+            
+            # is "loss" even in outputs?
+            if "loss" in outputs:
+                del outputs["loss"]
             logs.update(outputs)
 
             self._total_loss_scalar += tr_loss_scalar
