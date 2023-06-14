@@ -849,11 +849,13 @@ class ExtendedTrainer(Trainer):
                     if self.args.past_index >= 0:
                         self._past = outputs[self.args.past_index - 1]
 
+        other_outputs = {k: v.detach().item() for k, v in outputs.items() if v.numel() == 1}
+
         if prediction_loss_only:
-            return (loss, None, None)
+            return (loss, None, None, other_outputs)
 
         logits = nested_detach(logits)
         if len(logits) == 1:
             logits = logits[0]
 
-        return (loss, logits, labels, {k: v.detach().item() for k, v in outputs.items() if v.numel() == 1})
+        return (loss, logits, labels, other_outputs)
